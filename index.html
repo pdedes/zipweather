@@ -22,6 +22,12 @@
 					<md-text-float label="Search ZIP code" class="long" ng-model="zipCode"></md-text-float>
 				</form>
 
+				<div layout="column" layout-margin style="padding:25px;" ng-hide="loader">
+					<div layout="row" layout-sm="column" layout-align="space-around">
+					    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					</div>
+				</div>
+
 				<div layout="column" ng-show="weatherData" layout-fill>
 				  <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
 				    <md-list>
@@ -30,10 +36,11 @@
 				            <!-- <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" /> -->
 				            <div class="md-list-item-text">
 				              <h3>{{ weatherData.name }}</h3>
-				              <h4> {{ weatherData.main.temp_max - 273.15 }}&degC ... {{ weatherData.weather.description }}</h4>
+				              <h4>{{ weatherData.main.temp_max - 273.15 | number:0 }}&degC</h4>
+				              <h5>{{ weatherData.weather[0].description | capitalize}}</h5>
 				              <ul>
-				              	  <li>High of {{ weatherData.main.temp_max - 273.15 }}&degC, Low of {{ weatherData.main.temp_min - 273.15 }}&degC</li>
-					              <li>Wind: {{ weatherData.wind.speed }} mph @ {{ weatherData.wind.deg }}&deg</li> 
+				              	  <li>High of {{ weatherData.main.temp_max - 273.15 | number:0  }}&degC, Low of {{ weatherData.main.temp_min - 273.15 | number:0  }}&degC</li>
+					              <li>Wind: {{ weatherData.wind.speed }} mph @ {{ weatherData.wind.deg  | number:0 }}&deg</li> 
 					          </ul>
 				            </div>
 				          </md-list-item>
